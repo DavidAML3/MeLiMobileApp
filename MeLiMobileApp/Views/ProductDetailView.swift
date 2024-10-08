@@ -99,7 +99,7 @@ struct ProductDetailView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            viewModel.fetchProductDetails(productID: viewModel.product?.id ?? "")
+            viewModel.fetchProductDetails()
         }
     }
 }

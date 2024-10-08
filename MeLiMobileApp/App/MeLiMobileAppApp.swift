@@ -11,7 +11,7 @@ import SwiftUI
 struct MeLiMobileAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ProductView()
+            ProductsView()
         }
     }
 }

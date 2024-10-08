@@ -20,23 +20,7 @@
         }
       }
     },
-    "Mercado Libre App" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MercaLibreApp"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MercaLibreApp"
-          }
-        }
-      }
-    },
-    "MercadoLibre" : {
+    "txt_app_name" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
