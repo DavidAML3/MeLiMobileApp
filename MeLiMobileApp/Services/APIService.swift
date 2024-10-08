@@ -14,11 +14,13 @@ enum APIError: Error {
 }
 
 protocol APIServiceProtocol {
-    func fetch(url: String) -> AnyPublisher<[Product], Error>
+    func fetchProducts(url: String) -> AnyPublisher<[Product], Error>
+    func fetchProductDetail(url: String) -> AnyPublisher<Product, Error>
+    func fetchProductDescription(url: String) -> AnyPublisher<Description, Error>
 }
 
 class APIService: APIServiceProtocol {
-    func fetch(url: String) -> AnyPublisher<[Product], Error> {
+    func fetchProducts(url: String) -> AnyPublisher<[Product], Error> {
         guard let url = URL(string: url) else {
             return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
         }
@@ -27,6 +29,28 @@ class APIService: APIServiceProtocol {
             .map(\.data)
             .decode(type: SearchResult.self, decoder: JSONDecoder())
             .map { $0.results }
+            .eraseToAnyPublisher()
+    }
+
+    func fetchProductDetail(url: String) -> AnyPublisher<Product, Error> {
+        guard let url = URL(string: url) else {
+            return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: Product.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+
+    func fetchProductDescription(url: String) -> AnyPublisher<Description, Error> {
+        guard let url = URL(string: url) else {
+            return Fail(error: APIError.invalidResponse).eraseToAnyPublisher()
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: Description.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
 }

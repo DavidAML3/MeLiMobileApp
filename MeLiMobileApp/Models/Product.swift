@@ -12,8 +12,28 @@ struct SearchResult: Codable {
 }
 
 struct Product: Codable, Identifiable {
-    var id: String
-    var title: String
-    var price: Double
-    var thumbnail: String
+    let id: String
+    let title: String
+    let price: Double
+    let thumbnail: String
+    let available_quantity: Int
+    let accepts_mercadopago: Bool
+    let permalink: String
+    let shipping: ShippingInfo
+    let pictures: [ProductPicture]?
+    var description: String?
+}
+
+struct ShippingInfo: Codable {
+    let free_shipping: Bool
+    let logistic_type: String
+}
+
+struct ProductPicture: Codable, Identifiable {
+    let id: String
+    let secure_url: String
+}
+
+struct Description: Codable {
+    let plain_text: String
 }
