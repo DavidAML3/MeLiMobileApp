@@ -11,14 +11,11 @@ import Combine
 class ProductsViewModel: ObservableObject {
     @Published var products = [Product]()
     @Published var isLoading = false
+    @Published var isFailure = false
     @Published var errorMessage: String?
     
-    private let repository: ProductRepositoryProtocol
+    private let repository: ProductRepositoryProtocol = ProductRepository()
     private var cancellables = Set<AnyCancellable>()
-    
-    init(repository: ProductRepositoryProtocol = ProductRepository()) {
-        self.repository = repository
-    }
     
     func fetchProducts(searchTerm: String) {
         isLoading = true
@@ -28,6 +25,7 @@ class ProductsViewModel: ObservableObject {
                 self?.isLoading = false
                 switch completion {
                 case .failure(let error):
+                    self?.isFailure = true
                     self?.errorMessage = error.localizedDescription
                 case .finished:
                     break
