@@ -49,7 +49,7 @@ struct ProductsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                TextField("", text: $searchTerm, prompt: Text("txtfield_search_product"))
+                TextField("", text: $searchTerm, prompt: Text("txtfield_search_product").foregroundStyle(.gray.opacity(0.3)))
                     .autocorrectionDisabled()
                     .padding()
                     .background(Color.white)
